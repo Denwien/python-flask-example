@@ -1,0 +1,18 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block content %}
+<h1>Список пользователей</h1>
+
+<form method="get" action="/users/">
+    <input type="text" name="query" placeholder="Введите часть имени" value="{{ query }}">
+    <button type="submit">Найти</button>
+</form>
+
+<ul>
+    {% for user in users %}
+    <li>{{ user.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

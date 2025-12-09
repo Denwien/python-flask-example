@@ -1,0 +1,9 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}Пользователь{% endblock %}
+
+{% block content %}
+<h1>Пользователь {{ user.id }}</h1>
+<p>Имя: {{ user.name }}</p>
+<a href="/users/">Назад к списку</a>
+{% endblock %}
