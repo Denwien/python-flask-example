@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Создать нового пользователя</h1>
 
-<form method="post" action="/users/create">
+<form method="post" action="{{ url_for('users_create') }}">
     <p>
         <label for="name">Имя:</label>
         <input type="text" id="name" name="name" required>
@@ -17,5 +17,5 @@
     <button type="submit">Создать</button>
 </form>
 
-<a href="/users/">Назад к списку пользователей</a>
+<a href="{{ url_for('users_index') }}">Назад к списку пользователей</a>
 {% endblock %}
