@@ -1,0 +1,21 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}Создать пользователя{% endblock %}
+
+{% block content %}
+<h1>Создать нового пользователя</h1>
+
+<form method="post" action="/users/create">
+    <p>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+    </p>
+    <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </p>
+    <button type="submit">Создать</button>
+</form>
+
+<a href="/users/">Назад к списку пользователей</a>
+{% endblock %}

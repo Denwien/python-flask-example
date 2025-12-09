@@ -1,14 +1,36 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
+import json
+import os
 
 app = Flask(__name__, template_folder="app/templates")
 
-users = [
-    {"id": 1, "name": "mike"},
-    {"id": 2, "name": "mishel"},
-    {"id": 3, "name": "adel"},
-    {"id": 4, "name": "keks"},
-    {"id": 5, "name": "kamila"},
-]
+USERS_FILE = "users.json"
+
+# Загружаем пользователей из файла, если он существует
+if os.path.exists(USERS_FILE):
+    with open(USERS_FILE, "r", encoding="utf-8") as f:
+        users = json.load(f)
+else:
+    users = []
+
+@app.route("/users/new", methods=["GET"])
+def users_new():
+    return render_template("users/new.html")
+
+@app.route("/users/create", methods=["POST"])
+def users_create():
+    name = request.form.get("name")
+    email = request.form.get("email")
+    new_id = max([user["id"] for user in users], default=0) + 1
+    new_user = {"id": new_id, "name": name, "email": email}
+    users.append(new_user)
+
+    # Сохраняем всех пользователей в файл
+    with open(USERS_FILE, "w", encoding="utf-8") as f:
+        json.dump(users, f, ensure_ascii=False, indent=4)
+
+    # Редирект на /users/
+    return redirect("/users/")
 
 @app.route("/users/", methods=["GET"])
 def users_index():
