@@ -1,0 +1,9 @@
+<h1>Список школ</h1>
+<table>
+{% for school in schools %}
+<tr>
+  <td>{{ school.id }}</td>
+  <td><a href="{{ url_for('schools_show', id=school.id) }}">{{ school.name }}</a></td>
+</tr>
+{% endfor %}
+</table>

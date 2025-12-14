@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать пользователя</title>
+</head>
+<body>
+<h1>Создать нового пользователя</h1>
+
+{% if messages %}
+  <ul class="flashes">
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<form action="{{ url_for('users_create') }}" method="post">
+    <div>
+        <label>
+            Имя *
+            <input type="text" name="name" value="{{ request.form.get('name', '') }}">
+        </label>
+        {% if errors and errors.get('name') %}
+            <div style="color:red;">{{ errors.name }}</div>
+        {% endif %}
+    </div>
+    <div>
+        <label>
+            Email *
+            <input type="email" name="email" value="{{ request.form.get('email', '') }}">
+        </label>
+        {% if errors and errors.get('email') %}
+            <div style="color:red;">{{ errors.email }}</div>
+        {% endif %}
+    </div>
+    <div>
+        <input type="submit" value="Создать">
+    </div>
+</form>
+
+<p><a href="{{ url_for('users_index') }}">Вернуться к списку пользователей</a></p>
+</body>
+</html>

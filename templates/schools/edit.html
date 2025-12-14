@@ -1,0 +1,5 @@
+<h1>Редактировать школу {{ school.id }}</h1>
+<form method="POST" action="{{ url_for('schools_update', id=school.id) }}">
+    <label>Название: <input type="text" name="name" value="{{ school.name }}"></label>
+    <button type="submit">Сохранить</button>
+</form>
